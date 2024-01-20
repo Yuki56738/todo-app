@@ -62,11 +62,15 @@ class _TodoListPageState extends State<TodoListPage> {
               ListView.builder(
                 itemCount: todolist.length,
                 itemBuilder: (context, index) {
-                  return Card(
+                  return Row(children: [
+                    Flexible(child:
+                    Card(
                     child: ListTile(
                       title: Text(todolist[index]),
                     ),
-                  );
+                  )),
+                  Flexible(child: TextButton(onPressed: (){}, child: Text('削除'),))
+                  ]);
                 },
               ),
               Container(
@@ -92,6 +96,8 @@ class _TodoListPageState extends State<TodoListPage> {
             ],
           ),
           // TextButton(onPressed: (){}, child: Text('追加'))
-        ));
+        )
+
+    );
   }
 }
