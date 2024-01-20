@@ -79,7 +79,7 @@ class _TodoListPageState extends State<TodoListPage> {
                                 border: OutlineInputBorder(),
                                 hintText: 'タスクを入力'))),
                     TextButton(onPressed: () {
-                      print(_textEditingController.text);
+                      debugPrint(_textEditingController.text);
                       setState(() {
                         todolist.add(_textEditingController.text);
                       });
