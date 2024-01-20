@@ -50,6 +50,7 @@ class _TodoListPageState extends State<TodoListPage> {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController _textEditingController = TextEditingController();
     return Scaffold(
         appBar: AppBar(
           title: Text('タスク一覧'),
@@ -69,19 +70,28 @@ class _TodoListPageState extends State<TodoListPage> {
                 },
               ),
               Container(
-                child: TextField(
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(), hintText: 'タスクを入力してください'),
-                ),
-              ),
-              Container(
-                child: ElevatedButton(
-                  child: Text("追加"),
-                  onPressed: () => {},
+                child: Row(
+                  children: [
+                    Flexible(
+                        child: TextField(
+                          controller: _textEditingController,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: 'タスクを入力'))),
+                    TextButton(onPressed: () {
+                      print(_textEditingController.text);
+                      setState(() {
+                        todolist.add(_textEditingController.text);
+                      });
+                      int currentValue = todolist.length +1;
+                      storage.write(key: currentValue.toString(), value: _textEditingController.text);
+                    }, child: Text('追加'))
+                  ],
                 ),
               )
             ],
           ),
+          // TextButton(onPressed: (){}, child: Text('追加'))
         ));
   }
 }
