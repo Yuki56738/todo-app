@@ -56,8 +56,6 @@ class _TodoListPageState extends State<TodoListPage> {
           title: Text('タスク一覧'),
         ),
         body:
-        Row(
-          children: [
             Container(
               child: GridView.count(
                 crossAxisCount: 1,
@@ -100,8 +98,6 @@ class _TodoListPageState extends State<TodoListPage> {
               ),
               // TextButton(onPressed: (){}, child: Text('追加'))
             )
-          ]
-        )
 
 
     );
