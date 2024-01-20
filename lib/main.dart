@@ -35,11 +35,14 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class Todo {
   Todo({required this.name, required this.completed});
+
   String name;
   bool completed;
 }
+
 class TodoList extends StatefulWidget {
   const TodoList({super.key, required this.title});
 
@@ -62,12 +65,19 @@ class _TodoListState extends State<TodoList> {
   final List<Todo> _todos = <Todo>[];
   final TextEditingController _textFieldController = TextEditingController();
 
-  void _addTodoItem(String name){
+  void _addTodoItem(String name) {
     setState(() {
       _todos.add(Todo(name: name, completed: false));
     });
     _textFieldController.clear();
   }
+
+  void _handleTodoChange(Todo todo) {
+    setState(() {
+      todo.completed = !todo.completed;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -77,35 +87,34 @@ class _TodoListState extends State<TodoList> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-      ),
-      body:
-
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        ListView(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          children: _todos.map((Todo todo) {
-            return TodoItem(
-              todo: todo,
-            );
-          }).toList(),
+        appBar: AppBar(
+          // TRY THIS: Try changing the color here to a specific color (to
+          // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
+          // change color while the other colors stay the same.
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
         ),
-
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: _displayDialog,
-        tooltip: 'Todoを追加する',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        body:
+          // Center is a layout widget. It takes a single child and positions it
+          // in the middle of the parent.
+          ListView(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            children: _todos.map((Todo todo) {
+              return TodoItem(
+                todo: todo,
+              );
+            }).toList(),
+          ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: _displayDialog,
+          tooltip: 'Todoを追加する',
+          child: const Icon(Icons.add),
+        ),
     );
+    // This trailing comma makes auto-formatting nicer for build methods.
   }
+
   Future<void> _displayDialog() async {
     return showDialog<void>(
       context: context,
@@ -148,6 +157,7 @@ class _TodoListState extends State<TodoList> {
     );
   }
 }
+
 class TodoItem extends StatelessWidget {
   TodoItem({required this.todo}) : super(key: ObjectKey(todo));
 
