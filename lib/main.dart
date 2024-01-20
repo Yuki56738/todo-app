@@ -112,10 +112,10 @@ class _TodoListState extends State<TodoList> {
       // T: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Add a todo'),
+          title: const Text('タスクを入力してください'),
           content: TextField(
             controller: _textFieldController,
-            decoration: const InputDecoration(hintText: 'Type your todo'),
+            decoration: const InputDecoration(hintText: 'タスクを入力してください'),
             autofocus: true,
           ),
           actions: <Widget>[
