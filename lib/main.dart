@@ -70,7 +70,11 @@ class _TodoListPageState extends State<TodoListPage> {
                             title: Text(todolist[index]),
                           ),
                         )),
-                        Flexible(child: TextButton(onPressed: (){}, child: Text('削除'),))
+                        Flexible(child: TextButton(onPressed: (){
+                          setState(() {
+                            todolist.remove(todolist[index]);
+                          });
+                        }, child: Text('削除'),))
                       ]);
                     },
                   ),
