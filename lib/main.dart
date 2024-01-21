@@ -73,6 +73,9 @@ class _TodoListPageState extends State<TodoListPage> {
                         Flexible(child: TextButton(onPressed: (){
                           setState(() {
                             todolist.remove(todolist[index]);
+                            int key = index+1;
+                            storage.delete(key: key.toString());
+
                           });
                         }, child: Text('削除'),))
                       ]);
@@ -92,7 +95,7 @@ class _TodoListPageState extends State<TodoListPage> {
                           setState(() {
                             todolist.add(_textEditingController.text);
                           });
-                          int currentValue = todolist.length +1;
+                          int currentValue = todolist.length;
                           storage.write(key: currentValue.toString(), value: _textEditingController.text);
                         }, child: Text('追加'))
                       ],
