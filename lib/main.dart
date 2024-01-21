@@ -55,29 +55,43 @@ class _TodoListPageState extends State<TodoListPage> {
         appBar: AppBar(
           title: Text('タスク一覧'),
         ),
-        body: Container(
-          child: GridView.count(
-            crossAxisCount: 1,
-            children: [
-              ListView.builder(
+        body: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
                 itemCount: todolist.length,
                 itemBuilder: (context, index) {
+
                   return Card(
                     child: ListTile(
                       title: Text(todolist[index]),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          setState(() {
+                            todolist.removeAt(index);
+                          });
+                        },
+                      ),
                     ),
                   );
                 },
               ),
-              Container(
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
                     Flexible(
-                        child: TextField(
-                          controller: _textEditingController,
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                hintText: 'タスクを入力'))),
+
+                      child: TextField(
+                        controller: _textEditingController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'タスクを入力'
+                        )
+                      )
+                    ),
                     TextButton(onPressed: () {
                       print(_textEditingController.text);
                       setState(() {
@@ -92,6 +106,6 @@ class _TodoListPageState extends State<TodoListPage> {
             ],
           ),
           // TextButton(onPressed: (){}, child: Text('追加'))
-        ));
+        );
   }
 }
