@@ -55,61 +55,57 @@ class _TodoListPageState extends State<TodoListPage> {
         appBar: AppBar(
           title: Text('タスク一覧'),
         ),
-        body: Container(
-          child: GridView.count(
-            crossAxisCount: 1,
-            children: [
-              ListView.builder(
+        body: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
                 itemCount: todolist.length,
                 itemBuilder: (context, index) {
-                  return Row(children: [
-                    Flexible(
-                        child: Card(
-                      child: ListTile(
-                        title: Text(todolist[index]),
+
+                  return Card(
+                    child: ListTile(
+                      title: Text(todolist[index]),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          setState(() {
+                            todolist.removeAt(index);
+                          });
+                        },
                       ),
-                    )),
-                    Flexible(
-                        child: TextButton(
-                      onPressed: () {
-                        setState(() {
-                          todolist.remove(todolist[index]);
-                          int key = index + 1;
-                          storage.delete(key: key.toString());
-                        });
-                      },
-                      child: Text('削除'),
-                    ))
-                  ]);
+                    ),
+                  );
                 },
               ),
-              Container(
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
                     Flexible(
-                        child: TextField(
-                            controller: _textEditingController,
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                hintText: 'タスクを入力'))),
-                    TextButton(
-                        onPressed: () {
-                          debugPrint(_textEditingController.text);
-                          setState(() {
-                            todolist.add(_textEditingController.text);
-                          });
-                          int currentValue = todolist.length;
-                          storage.write(
-                              key: currentValue.toString(),
-                              value: _textEditingController.text);
-                        },
-                        child: Text('追加'))
+
+                      child: TextField(
+                        controller: _textEditingController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'タスクを入力'
+                        )
+                      )
+                    ),
+                    TextButton(onPressed: () {
+                      print(_textEditingController.text);
+                      setState(() {
+                        todolist.add(_textEditingController.text);
+                      });
+                      int currentValue = todolist.length +1;
+                      storage.write(key: currentValue.toString(), value: _textEditingController.text);
+                    }, child: Text('追加'))
                   ],
                 ),
               )
             ],
           ),
           // TextButton(onPressed: (){}, child: Text('追加'))
-        ));
+        );
   }
 }
