@@ -58,8 +58,8 @@ class _TodoListPageState extends State<TodoListPage> {
 
         body:
             Container(
-              child: GridView.count(
-                crossAxisCount: 1,
+              child: Column(
+                // crossAxisCount: 1,
                 children: [
                   ListView.builder(
                     itemCount: todolist.length,
