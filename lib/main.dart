@@ -53,7 +53,7 @@ class _TodoListPageState extends State<TodoListPage> {
     TextEditingController _textEditingController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
-        title: Text('タスク一覧'),
+        title: const Text('タスク一覧'),
       ),
       body: Column(
         children: [
@@ -84,20 +84,20 @@ class _TodoListPageState extends State<TodoListPage> {
                 Flexible(
                     child: TextField(
                         controller: _textEditingController,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: 'タスクを入力'
-                        )
-                    )
-                ),
-                TextButton(onPressed: () {
-                  debugPrint(_textEditingController.text);
-                  setState(() {
-                    todolist.add(_textEditingController.text);
-                  });
-                  int currentValue = todolist.length +1;
-                  storage.write(key: currentValue.toString(), value: _textEditingController.text);
-                }, child: Text('追加'))
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(), hintText: 'タスクを入力'))),
+                TextButton(
+                    onPressed: () {
+                      debugPrint(_textEditingController.text);
+                      setState(() {
+                        todolist.add(_textEditingController.text);
+                      });
+                      int currentValue = todolist.length + 1;
+                      storage.write(
+                          key: currentValue.toString(),
+                          value: _textEditingController.text);
+                    },
+                    child: const Text('追加'))
               ],
             ),
           )
